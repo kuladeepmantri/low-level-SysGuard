@@ -6,6 +6,7 @@ interface AnimatedTerminalProps {
   command: string
   output: string
   title?: string
+  minHeight?: number
 }
 
 export default function AnimatedTerminal({ command, output, title = 'terminal' }: AnimatedTerminalProps) {
@@ -13,6 +14,10 @@ export default function AnimatedTerminal({ command, output, title = 'terminal' }
   const [showOutput, setShowOutput] = useState(false)
   const [hasAnimated, setHasAnimated] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  
+  // Calculate the height based on output lines to prevent layout shift
+  const outputLines = output.split('\n').length
+  const estimatedHeight = Math.max(200, 60 + (outputLines * 22)) // 60px for header/padding, 22px per line
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,10 +59,10 @@ export default function AnimatedTerminal({ command, output, title = 'terminal' }
     if (line.includes('[HIGH]') || line.includes('[MEDIUM]') || line.includes('Deviation') || line.includes('Risk')) {
       return 'text-[var(--terminal-yellow)]'
     }
-    if (line.includes('ALLOW') || line.includes('Trace ID') || line.includes('Profile ID') || line.includes('saved') || line.includes('created')) {
+    if (line.includes('ALLOW') || line.includes('Trace ID') || line.includes('Profile ID') || line.includes('saved') || line.includes('created') || line.includes('Policy ID') || line.includes('Successfully')) {
       return 'text-[var(--terminal-green)]'
     }
-    if (line.startsWith('[') || line.startsWith('  -')) {
+    if (line.startsWith('[') || line.startsWith('  -') || line.startsWith(' =>')) {
       return 'text-[var(--terminal-dim)]'
     }
     return 'text-[var(--terminal-text)]'
@@ -66,29 +71,36 @@ export default function AnimatedTerminal({ command, output, title = 'terminal' }
   return (
     <div 
       ref={ref}
-      className="rounded-lg overflow-hidden border border-[var(--border)] dark:border-[var(--terminal-border,var(--border))] bg-[var(--terminal-bg)]"
+      className="rounded-xl overflow-hidden border border-[var(--border)] dark:border-[#1e293b] bg-[var(--terminal-bg)] shadow-[var(--shadow-md)]"
+      style={{ minHeight: `${estimatedHeight}px` }}
     >
-      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[var(--border)] dark:border-[var(--terminal-border,var(--border))] bg-[var(--terminal-bg)]">
+      {/* Terminal header with macOS-style buttons */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[#1e293b] bg-[#0c1222]">
         <div className="flex gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444]/70"></div>
-          <div className="w-2.5 h-2.5 rounded-full bg-[#eab308]/70"></div>
-          <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e]/70"></div>
+          <div className="w-3 h-3 rounded-full bg-[#ff5f57] hover:bg-[#ff5f57]/80 transition-colors cursor-pointer"></div>
+          <div className="w-3 h-3 rounded-full bg-[#febc2e] hover:bg-[#febc2e]/80 transition-colors cursor-pointer"></div>
+          <div className="w-3 h-3 rounded-full bg-[#28c840] hover:bg-[#28c840]/80 transition-colors cursor-pointer"></div>
         </div>
-        <span className="ml-3 text-xs text-[var(--terminal-dim)]">{title}</span>
+        <div className="flex-1 text-center">
+          <span className="text-xs font-medium text-[var(--terminal-dim)]">{title}</span>
+        </div>
+        <div className="w-[52px]"></div> {/* Spacer for centering */}
       </div>
       
-      <div className="p-4 font-mono text-[13px] leading-relaxed min-h-[120px]">
+      {/* Terminal content */}
+      <div className="p-5 font-mono text-[13px] leading-[1.7] overflow-x-auto">
         <div className="text-[var(--terminal-text)]">
-          {displayedCommand}
+          <span className="text-[var(--terminal-green)]">$</span>
+          <span className="ml-2">{displayedCommand.slice(2)}</span>
           {!showOutput && hasAnimated && (
-            <span className="inline-block w-1.5 h-4 bg-[var(--terminal-text)] animate-pulse ml-0.5"></span>
+            <span className="inline-block w-2 h-[18px] bg-[var(--terminal-text)] animate-pulse ml-0.5 align-middle"></span>
           )}
         </div>
         
         {showOutput && (
-          <div className="mt-2">
+          <div className="mt-3 space-y-0">
             {output.split('\n').map((line, i) => (
-              <div key={i} className={getLineStyle(line)}>
+              <div key={i} className={`${getLineStyle(line)} whitespace-pre`}>
                 {line || '\u00A0'}
               </div>
             ))}

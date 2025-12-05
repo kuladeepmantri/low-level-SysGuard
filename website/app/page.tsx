@@ -5,22 +5,31 @@ import ThemeToggle from './components/ThemeToggle'
 import AnimatedTerminal from './components/AnimatedTerminal'
 
 const sections = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'demo', label: 'Live Demo' },
-  { id: 'learn', label: 'Learn Command' },
-  { id: 'profile', label: 'Profile Command' },
-  { id: 'compare', label: 'Compare Command' },
-  { id: 'policy', label: 'Policy Command' },
-  { id: 'enforce', label: 'Enforce Command' },
-  { id: 'ai', label: 'AI Integration' },
-  { id: 'internals', label: 'Internals' },
-  { id: 'sensitive', label: 'Sensitive Files' },
-  { id: 'setup', label: 'Setup' },
+  { id: 'overview', label: 'Overview', icon: '◈' },
+  { id: 'demo', label: 'Live Demo', icon: '▶' },
+  { id: 'learn', label: 'Learn Command', icon: '○' },
+  { id: 'profile', label: 'Profile Command', icon: '○' },
+  { id: 'compare', label: 'Compare Command', icon: '○' },
+  { id: 'policy', label: 'Policy Command', icon: '○' },
+  { id: 'enforce', label: 'Enforce Command', icon: '○' },
+  { id: 'ai', label: 'AI Integration', icon: '◇' },
+  { id: 'internals', label: 'Internals', icon: '◇' },
+  { id: 'sensitive', label: 'Sensitive Files', icon: '◇' },
+  { id: 'setup', label: 'Setup', icon: '◇' },
 ]
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('overview')
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,86 +53,111 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[var(--bg)]">
-      {/* Mobile header */}
-      <header className="lg:hidden fixed top-0 w-full bg-[var(--bg)]/95 backdrop-blur-sm border-b border-[var(--border)] z-50">
+      {/* Mobile header - SOLID background, no transparency */}
+      <header className={`lg:hidden fixed top-0 w-full z-50 transition-all duration-200 ${
+        scrolled 
+          ? 'bg-[var(--bg)] shadow-[var(--shadow-md)] border-b border-[var(--border)]' 
+          : 'bg-[var(--bg)] border-b border-[var(--border)]'
+      }`}>
         <div className="px-5 h-14 flex items-center justify-between">
-          <span className="font-semibold text-[var(--text)]">low-level-SysGuard</span>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <span className="font-semibold text-[var(--text)]">SysGuard</span>
+          </div>
+          <div className="flex items-center gap-2">
             <ThemeToggle />
             <button 
               onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 -mr-2 text-[var(--text-secondary)]"
+              className="p-2 -mr-2 text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-secondary)] rounded-lg transition-colors"
               aria-label="Menu"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {menuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 )}
               </svg>
             </button>
           </div>
         </div>
         
-        {menuOpen && (
-          <nav className="px-5 py-3 border-t border-[var(--border)] bg-[var(--bg)] max-h-[70vh] overflow-y-auto">
+        {/* Mobile menu with animation */}
+        <div className={`overflow-hidden transition-all duration-200 ease-out ${
+          menuOpen ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <nav className="px-4 py-3 border-t border-[var(--border)] bg-[var(--bg-secondary)]">
             {sections.map(s => (
               <a 
                 key={s.id}
                 href={`#${s.id}`}
                 onClick={() => setMenuOpen(false)}
-                className={`block py-2 text-sm transition-colors ${
+                className={`flex items-center gap-2 px-3 py-2.5 text-sm rounded-lg transition-all ${
                   activeSection === s.id 
-                    ? 'text-[var(--text)] font-medium' 
-                    : 'text-[var(--text-secondary)]'
+                    ? 'text-[var(--accent)] bg-[var(--accent)]/10 font-medium' 
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-tertiary)]'
                 }`}
               >
+                <span className="text-xs opacity-50">{s.icon}</span>
                 {s.label}
               </a>
             ))}
-            <div className="border-t border-[var(--border)] mt-2 pt-2">
+            <div className="border-t border-[var(--border)] mt-3 pt-3">
               <a 
                 href="https://github.com/kuladeepmantri/low-level-SysGuard"
-                className="block py-2 text-sm text-[var(--text-secondary)]"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3 py-2.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text)] rounded-lg hover:bg-[var(--bg-tertiary)] transition-colors"
               >
-                GitHub ↗
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                </svg>
+                View on GitHub
               </a>
             </div>
           </nav>
-        )}
+        </div>
       </header>
 
-      {/* Desktop sidebar */}
-      <aside className="hidden lg:block fixed left-0 top-0 w-52 h-screen border-r border-[var(--border)] bg-[var(--bg)] overflow-y-auto">
-        <div className="p-5 pb-3">
-          <h1 className="font-semibold text-[var(--text)]">low-level-SysGuard</h1>
-          <p className="text-xs text-[var(--text-muted)] mt-0.5">ARM64 syscall security</p>
+      {/* Desktop sidebar - SOLID background with shadow */}
+      <aside className="hidden lg:flex flex-col fixed left-0 top-0 w-56 h-screen border-r border-[var(--border)] bg-[var(--bg)] shadow-[var(--shadow)]">
+        <div className="p-5 pb-4 border-b border-[var(--border)]">
+          <div>
+            <h1 className="font-semibold text-[var(--text)] text-sm">SysGuard</h1>
+            <p className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">ARM64 Security</p>
+          </div>
         </div>
         
-        <nav className="px-3 pb-4">
-          {sections.map(s => (
-            <a 
-              key={s.id}
-              href={`#${s.id}`}
-              className={`block px-3 py-1.5 text-sm rounded-md transition-all ${
-                activeSection === s.id 
-                  ? 'text-[var(--text)] bg-[var(--bg-secondary)] font-medium' 
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-secondary)]'
-              }`}
-            >
-              {s.label}
-            </a>
-          ))}
+        <nav className="flex-1 overflow-y-auto px-3 py-4">
+          <div className="space-y-0.5">
+            {sections.map(s => (
+              <a 
+                key={s.id}
+                href={`#${s.id}`}
+                className={`flex items-center gap-2.5 px-3 py-2 text-[13px] rounded-lg transition-all ${
+                  activeSection === s.id 
+                    ? 'text-[var(--accent)] bg-[var(--accent)]/10 font-medium' 
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--bg-secondary)]'
+                }`}
+              >
+                <span className={`text-[10px] ${activeSection === s.id ? 'opacity-100' : 'opacity-40'}`}>{s.icon}</span>
+                {s.label}
+              </a>
+            ))}
+          </div>
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[var(--border)] bg-[var(--bg)]">
-          <div className="flex items-center justify-between px-2">
+        <div className="p-4 border-t border-[var(--border)] bg-[var(--bg-secondary)]">
+          <div className="flex items-center justify-between">
             <a 
               href="https://github.com/kuladeepmantri/low-level-SysGuard"
-              className="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[13px] text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors"
             >
-              GitHub ↗
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+              </svg>
+              GitHub
             </a>
             <ThemeToggle />
           </div>
@@ -131,35 +165,40 @@ export default function Home() {
       </aside>
 
       {/* Main content */}
-      <main className="lg:ml-52 px-5 lg:px-12 xl:px-16 pt-20 lg:pt-10 pb-24 max-w-3xl">
+      <main className="lg:ml-56 px-5 lg:px-12 xl:px-16 pt-20 lg:pt-10 pb-24 max-w-3xl">
         
         {/* Overview */}
-        <section id="overview" className="mb-20 scroll-mt-20">
-          <div className="mb-5">
-            <a href="https://github.com/kuladeepmantri/low-level-SysGuard/actions" target="_blank" rel="noopener noreferrer">
-              <img src="https://github.com/kuladeepmantri/low-level-SysGuard/actions/workflows/cmake-single-platform.yml/badge.svg" alt="Build" className="h-5" />
+        <section id="overview" className="mb-16 scroll-mt-20">
+          <div className="mb-6 flex flex-wrap items-center gap-3">
+            <a href="https://github.com/kuladeepmantri/low-level-SysGuard/actions" target="_blank" rel="noopener noreferrer" className="inline-block">
+              <img src="https://github.com/kuladeepmantri/low-level-SysGuard/actions/workflows/cmake-single-platform.yml/badge.svg" alt="Build Status" className="h-5 rounded" />
             </a>
+            <span className="px-2.5 py-1 text-xs font-medium bg-[var(--bg-secondary)] text-[var(--text-secondary)] border border-[var(--border)] rounded-full">v1.0.0</span>
           </div>
           
-          <h2 className="text-2xl font-semibold text-[var(--text)] mb-4">Overview</h2>
+          <h2 className="text-2xl font-bold text-[var(--text)] mb-4">Overview</h2>
           
-          <p className="text-[var(--text-secondary)] mb-4">
+          <p className="text-[var(--text-secondary)] mb-4 leading-relaxed">
             SysGuard is a security tool that monitors programs at the syscall level. It intercepts every 
             system call a program makes, including file operations, network connections, and process creation. 
             This data is used to build behavioral profiles, detect anomalies, and enforce security policies.
           </p>
           
-          <p className="text-[var(--text-secondary)] mb-4">
+          <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
             Built for ARM64 Linux using the kernel&apos;s ptrace interface. Runs entirely in userspace 
-            with no kernel modules required. Designed for containerized environments.
+            with no kernel modules required. Optionally connects to LLMs for natural language security analysis.
           </p>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--text-muted)]">
-            <span>C11</span>
-            <span>~15,000 lines</span>
-            <span>json-c</span>
-            <span>OpenSSL</span>
-            <span>libcurl</span>
+          {/* Tech stack badges */}
+          <div className="flex flex-wrap gap-2">
+            {['C11', 'ARM64', 'ptrace', 'OpenSSL', 'json-c', 'libcurl'].map((tech) => (
+              <span 
+                key={tech}
+                className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-secondary)] text-[var(--text-secondary)] rounded-lg border border-[var(--border)]"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
         </section>
 
@@ -556,23 +595,47 @@ sudo ./sysguard learn -- /bin/ls`}</pre>
         </section>
 
         {/* Footer */}
-        <footer className="pt-8 border-t border-[var(--border)] text-sm text-[var(--text-muted)]">
-          MIT License
-          <span className="mx-2">·</span>
-          <a href="https://github.com/kuladeepmantri/low-level-SysGuard" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">
-            github.com/kuladeepmantri/low-level-SysGuard
-          </a>
+        <footer className="mt-16 pt-8 border-t border-[var(--border)]">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <span className="text-sm font-medium text-[var(--text)]">SysGuard</span>
+              <span className="text-sm text-[var(--text-muted)]"> · Built by </span>
+              <a 
+                href="https://github.com/kuladeepmantri" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+              >
+                Kuladeep Mantri
+              </a>
+            </div>
+            <div className="flex items-center gap-4 text-sm text-[var(--text-muted)]">
+              <span>MIT License</span>
+              <span className="hidden sm:inline">·</span>
+              <a 
+                href="https://github.com/kuladeepmantri/low-level-SysGuard" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+              >
+                View on GitHub
+              </a>
+            </div>
+          </div>
+          <p className="mt-4 text-xs text-[var(--text-muted)]">
+            ARM64 Linux syscall tracer and security analyzer.
+          </p>
         </footer>
       </main>
 
-      {/* Scroll to top button */}
+      {/* Scroll to top button - improved styling */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-6 right-6 p-3 rounded-full bg-[var(--bg-secondary)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] shadow-lg transition-all hover:scale-105 lg:hidden"
+        className="fixed bottom-6 right-6 p-3 rounded-xl bg-[var(--bg)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] shadow-[var(--shadow-md)] transition-all duration-200 hover:shadow-lg active:scale-95"
         aria-label="Scroll to top"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
         </svg>
       </button>
     </div>
