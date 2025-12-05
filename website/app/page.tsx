@@ -122,8 +122,7 @@ export default function Home() {
       <aside className="hidden lg:flex flex-col fixed left-0 top-0 w-56 h-screen border-r border-[var(--border)] bg-[var(--bg)] shadow-[var(--shadow)]">
         <div className="p-5 pb-4 border-b border-[var(--border)]">
           <div>
-            <h1 className="font-semibold text-[var(--text)] text-sm">Auris</h1>
-            <p className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">Syscall Intelligence</p>
+            <h1 className="font-semibold text-[var(--text)] text-lg tracking-tight">Auris</h1>
           </div>
         </div>
         
