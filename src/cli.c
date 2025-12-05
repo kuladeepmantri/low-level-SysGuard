@@ -225,6 +225,16 @@ sg_error_t sg_cli_parse(int argc, char *argv[], sg_cli_opts_t *opts)
         return SG_OK;  /* No command, will show usage */
     }
     
+    /* Check for --help or --version as first argument */
+    if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) {
+        opts->command = CMD_HELP;
+        return SG_OK;
+    }
+    if (strcmp(argv[1], "--version") == 0 || strcmp(argv[1], "-V") == 0) {
+        opts->command = CMD_VERSION;
+        return SG_OK;
+    }
+    
     /* First argument is the command */
     opts->command = parse_command(argv[1]);
     
