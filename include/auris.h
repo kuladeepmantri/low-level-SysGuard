@@ -1,10 +1,10 @@
 /*
- * SysGuard - ARM Linux Syscall Tracer & Security Analyzer
+ * Auris - ARM Linux Syscall Tracer & Security Analyzer
  * Main header file with core type definitions and constants
  */
 
-#ifndef SYSGUARD_H
-#define SYSGUARD_H
+#ifndef AURIS_H
+#define AURIS_H
 
 #define _GNU_SOURCE
 #define _POSIX_C_SOURCE 200809L
@@ -16,10 +16,10 @@
 #include <sys/types.h>
 
 /* Version information */
-#define SYSGUARD_VERSION_MAJOR 1
-#define SYSGUARD_VERSION_MINOR 0
-#define SYSGUARD_VERSION_PATCH 0
-#define SYSGUARD_VERSION_STRING "1.0.0"
+#define AURIS_VERSION_MAJOR 1
+#define AURIS_VERSION_MINOR 0
+#define AURIS_VERSION_PATCH 0
+#define AURIS_VERSION_STRING "1.0.0"
 
 /* Limits and constants */
 #define MAX_PATH_LEN 4096
@@ -240,7 +240,7 @@ typedef struct {
     pid_t root_pid;
     int exit_code;
     uint64_t total_syscalls;
-    char sysguard_version[16];
+    char auris_version[16];
 } sg_trace_meta_t;
 
 /* Complete trace */
@@ -526,4 +526,4 @@ char *sg_read_file(const char *path, size_t *len);
 int sg_write_file(const char *path, const void *data, size_t len);
 void sg_safe_strncpy(char *dst, const char *src, size_t n);
 
-#endif /* SYSGUARD_H */
+#endif /* AURIS_H */

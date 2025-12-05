@@ -1,12 +1,12 @@
 /*
- * SysGuard - JSON Utilities Header
+ * Auris - JSON Utilities Header
  * Serialization and deserialization helpers
  */
 
-#ifndef SYSGUARD_JSON_UTILS_H
-#define SYSGUARD_JSON_UTILS_H
+#ifndef AURIS_JSON_UTILS_H
+#define AURIS_JSON_UTILS_H
 
-#include "sysguard.h"
+#include "auris.h"
 
 /* Forward declarations */
 struct sg_trace;
@@ -74,4 +74,4 @@ char *sg_dataflow_result_to_json(const sg_dataflow_result_t *result);
  */
 char *sg_ai_response_to_json(const sg_ai_response_t *response);
 
-#endif /* SYSGUARD_JSON_UTILS_H */
+#endif /* AURIS_JSON_UTILS_H */

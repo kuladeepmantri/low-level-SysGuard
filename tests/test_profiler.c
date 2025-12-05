@@ -1,12 +1,12 @@
 /*
- * SysGuard - Profiler Tests
+ * Auris - Profiler Tests
  */
 
 #include <check.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "profiler.h"
 #include "trace_store.h"
 #include "syscall_table.h"

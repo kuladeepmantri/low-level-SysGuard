@@ -1,12 +1,12 @@
 /*
- * SysGuard - Command Line Interface
+ * Auris - Command Line Interface
  * Argument parsing and command dispatch
  */
 
-#ifndef SYSGUARD_CLI_H
-#define SYSGUARD_CLI_H
+#ifndef AURIS_CLI_H
+#define AURIS_CLI_H
 
-#include "sysguard.h"
+#include "auris.h"
 #include "enforcer.h"
 
 /*
@@ -159,4 +159,4 @@ void sg_cli_config_defaults(sg_config_t *config);
  */
 sg_error_t sg_cli_validate_config(const sg_config_t *config);
 
-#endif /* SYSGUARD_CLI_H */
+#endif /* AURIS_CLI_H */

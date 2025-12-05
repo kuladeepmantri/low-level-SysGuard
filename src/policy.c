@@ -1,5 +1,5 @@
 /*
- * SysGuard - Security Policy Engine
+ * Auris - Security Policy Engine
  * Policy generation, storage, and validation
  */
 
@@ -11,7 +11,7 @@
 #include <dirent.h>
 #include <json-c/json.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "policy.h"
 #include "syscall_table.h"
 

@@ -1,5 +1,5 @@
 /*
- * SysGuard - AI Analysis Client
+ * Auris - AI Analysis Client
  * Integration with local LLM service for security analysis
  */
 
@@ -10,7 +10,7 @@
 #include <curl/curl.h>
 #include <json-c/json.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "ai_client.h"
 
 /* Response buffer for CURL */

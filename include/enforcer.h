@@ -1,12 +1,12 @@
 /*
- * SysGuard - Policy Enforcer
+ * Auris - Policy Enforcer
  * Runtime enforcement of security policies via ptrace
  */
 
-#ifndef SYSGUARD_ENFORCER_H
-#define SYSGUARD_ENFORCER_H
+#ifndef AURIS_ENFORCER_H
+#define AURIS_ENFORCER_H
 
-#include "sysguard.h"
+#include "auris.h"
 #include "policy.h"
 #include "tracer.h"
 
@@ -165,4 +165,4 @@ sg_error_t sg_enforcer_apply_tuning(sg_enforcer_ctx_t *ctx,
                                      const uint32_t *approved_syscalls,
                                      size_t count);
 
-#endif /* SYSGUARD_ENFORCER_H */
+#endif /* AURIS_ENFORCER_H */

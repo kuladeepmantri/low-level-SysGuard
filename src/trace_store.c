@@ -1,5 +1,5 @@
 /*
- * SysGuard - Trace Storage
+ * Auris - Trace Storage
  * Persistent storage and retrieval of syscall traces as JSON
  */
 
@@ -13,7 +13,7 @@
 #include <sys/stat.h>
 #include <json-c/json.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "trace_store.h"
 #include "json_utils.h"
 

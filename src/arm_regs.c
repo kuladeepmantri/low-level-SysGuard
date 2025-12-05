@@ -1,5 +1,5 @@
 /*
- * SysGuard - ARM64 Register Access
+ * Auris - ARM64 Register Access
  * Functions for reading ARM64 registers via ptrace
  */
 
@@ -14,7 +14,7 @@
 #include <linux/elf.h>
 #include <asm/ptrace.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "tracer.h"
 
 /*

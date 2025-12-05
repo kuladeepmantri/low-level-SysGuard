@@ -1,5 +1,5 @@
 /*
- * SysGuard - ARM64 Syscall Tracer
+ * Auris - ARM64 Syscall Tracer
  * Ptrace-based syscall interception for ARM64 Linux
  */
 
@@ -15,7 +15,7 @@
 #include <sys/user.h>
 #include <linux/ptrace.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "tracer.h"
 #include "syscall_table.h"
 #include "trace_store.h"
@@ -487,8 +487,8 @@ sg_error_t sg_tracer_run(sg_tracer_ctx_t *ctx,
     sg_safe_strncpy(trace->meta.binary_path, path, sizeof(trace->meta.binary_path));
     sg_hash_file(path, trace->meta.binary_hash, sizeof(trace->meta.binary_hash));
     gethostname(trace->meta.hostname, sizeof(trace->meta.hostname));
-    sg_safe_strncpy(trace->meta.sysguard_version, SYSGUARD_VERSION_STRING,
-                    sizeof(trace->meta.sysguard_version));
+    sg_safe_strncpy(trace->meta.auris_version, AURIS_VERSION_STRING,
+                    sizeof(trace->meta.auris_version));
     trace->meta.start_time = sg_now();
     
     /* Copy argv */
@@ -690,8 +690,8 @@ sg_error_t sg_tracer_attach(sg_tracer_ctx_t *ctx, pid_t pid, sg_trace_t **trace_
     }
     
     gethostname(trace->meta.hostname, sizeof(trace->meta.hostname));
-    sg_safe_strncpy(trace->meta.sysguard_version, SYSGUARD_VERSION_STRING,
-                    sizeof(trace->meta.sysguard_version));
+    sg_safe_strncpy(trace->meta.auris_version, AURIS_VERSION_STRING,
+                    sizeof(trace->meta.auris_version));
     trace->meta.start_time = sg_now();
     trace->meta.root_pid = pid;
     

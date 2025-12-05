@@ -1,12 +1,12 @@
 /*
- * SysGuard - Policy Tests
+ * Auris - Policy Tests
  */
 
 #include <check.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "policy.h"
 #include "syscall_table.h"
 

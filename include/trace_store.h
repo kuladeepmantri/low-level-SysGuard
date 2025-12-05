@@ -1,12 +1,12 @@
 /*
- * SysGuard - Trace Storage
+ * Auris - Trace Storage
  * Persistent storage and retrieval of syscall traces
  */
 
-#ifndef SYSGUARD_TRACE_STORE_H
-#define SYSGUARD_TRACE_STORE_H
+#ifndef AURIS_TRACE_STORE_H
+#define AURIS_TRACE_STORE_H
 
-#include "sysguard.h"
+#include "auris.h"
 
 /* Trace file format version */
 #define TRACE_FORMAT_VERSION 1
@@ -141,4 +141,4 @@ sg_error_t sg_trace_export_binary(const sg_trace_t *trace,
 sg_error_t sg_trace_import_binary(const char *path, 
                                    sg_trace_t **trace_out);
 
-#endif /* SYSGUARD_TRACE_STORE_H */
+#endif /* AURIS_TRACE_STORE_H */

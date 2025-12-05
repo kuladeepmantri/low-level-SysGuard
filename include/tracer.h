@@ -1,12 +1,12 @@
 /*
- * SysGuard - ARM Linux Syscall Tracer
+ * Auris - ARM Linux Syscall Tracer
  * Ptrace-based syscall interception for ARM64 Linux
  */
 
-#ifndef SYSGUARD_TRACER_H
-#define SYSGUARD_TRACER_H
+#ifndef AURIS_TRACER_H
+#define AURIS_TRACER_H
 
-#include "sysguard.h"
+#include "auris.h"
 #include <sys/ptrace.h>
 #include <sys/user.h>
 #include <sys/wait.h>
@@ -172,4 +172,4 @@ ssize_t sg_read_memory(pid_t pid, uint64_t addr, void *buf, size_t len);
  */
 sg_error_t sg_read_sockaddr(pid_t pid, uint64_t addr, size_t len, sg_netaddr_t *out);
 
-#endif /* SYSGUARD_TRACER_H */
+#endif /* AURIS_TRACER_H */

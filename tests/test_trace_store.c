@@ -1,5 +1,5 @@
 /*
- * SysGuard - Trace Store Tests
+ * Auris - Trace Store Tests
  */
 
 #include <check.h>
@@ -8,11 +8,11 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "trace_store.h"
 
 static sg_trace_store_t store;
-static char test_dir[] = "/tmp/sysguard_test_XXXXXX";
+static char test_dir[] = "/tmp/auris_test_XXXXXX";
 
 static void setup(void)
 {

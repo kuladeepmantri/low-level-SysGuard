@@ -1,8 +1,12 @@
-# SysGuard
+# Auris
 
-**ARM Linux Syscall Tracer & Security Analyzer**
+**/ˈaʊ.rɪs/** — Latin: *to listen*
 
-SysGuard is a production-quality command-line security application for ARM64 Linux containers. It provides syscall tracing, behavioral profiling, adaptive policy enforcement, and AI-assisted security analysis.
+**ARM64 Syscall Tracer & Behavioral Security Analyzer**
+
+Auris is a research-grade security tool that listens to programs at the syscall level. It intercepts every system call a program makes — file operations, network connections, process creation — and uses this data to build behavioral profiles, detect anomalies, and enforce security policies.
+
+Built for ARM64 Linux using the kernel's ptrace interface. Runs entirely in userspace with no kernel modules required.
 
 ## Features
 
@@ -29,10 +33,10 @@ SysGuard is a production-quality command-line security application for ARM64 Lin
 
 ```bash
 # Build the container
-docker build --platform linux/arm64 -t sysguard .
+docker build --platform linux/arm64 -t auris .
 
 # Run with access to trace processes
-docker run --platform linux/arm64 --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -it sysguard
+docker run --platform linux/arm64 --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -it auris
 ```
 
 ### Native Build
@@ -55,60 +59,60 @@ sudo make install
 
 ```bash
 # Trace a program and save the syscall trace
-sysguard learn -- /bin/ls -la
+auris learn -- /bin/ls -la
 
 # Trace with custom trace ID
-sysguard learn -t my-trace-id -- ./myapp arg1 arg2
+auris learn -t my-trace-id -- ./myapp arg1 arg2
 ```
 
 ### Profile Mode - Build Behavioral Profile
 
 ```bash
 # Build profile from a trace
-sysguard profile -t <trace-id>
+auris profile -t <trace-id>
 
 # View existing profile
-sysguard profile -p <profile-id>
+auris profile -p <profile-id>
 ```
 
 ### Compare Mode - Detect Anomalies
 
 ```bash
 # Compare a new run against baseline
-sysguard compare -p <profile-id> -- ./myapp
+auris compare -p <profile-id> -- ./myapp
 
 # Compare existing trace against baseline
-sysguard compare -p <profile-id> -t <trace-id>
+auris compare -p <profile-id> -t <trace-id>
 ```
 
 ### Policy Mode - Generate Security Policy
 
 ```bash
 # Generate policy from profile
-sysguard policy -p <profile-id>
+auris policy -p <profile-id>
 
 # Generate minimal policy (essential syscalls only)
-sysguard policy
+auris policy
 
 # View existing policy
-sysguard policy -P <policy-id>
+auris policy -P <policy-id>
 ```
 
 ### Enforce Mode - Run Under Policy
 
 ```bash
 # Run with alert mode (log violations but allow)
-sysguard enforce -P <policy-id> -m alert -- ./myapp
+auris enforce -P <policy-id> -m alert -- ./myapp
 
 # Run with block mode (prevent policy violations)
-sysguard enforce -P <policy-id> -m block -- ./myapp
+auris enforce -P <policy-id> -m block -- ./myapp
 ```
 
 ### Analyze Mode - AI Analysis
 
 ```bash
 # Analyze profile with AI
-sysguard analyze -p <profile-id> -a http://localhost:11434/api/generate -M llama2
+auris analyze -p <profile-id> -a http://localhost:11434/api/generate -M llama2
 ```
 
 ## Options
@@ -120,7 +124,7 @@ sysguard analyze -p <profile-id> -a http://localhost:11434/api/generate -M llama
 | `-v, --verbose` | Verbose output |
 | `-q, --quiet` | Quiet mode |
 | `-j, --json` | Output in JSON format |
-| `-d, --data-dir DIR` | Data directory (default: /data/sysguard) |
+| `-d, --data-dir DIR` | Data directory (default: /data/auris) |
 | `-t, --trace-id ID` | Trace ID to use |
 | `-p, --profile-id ID` | Profile ID to use |
 | `-P, --policy-id ID` | Policy ID to use |
@@ -131,10 +135,10 @@ sysguard analyze -p <profile-id> -a http://localhost:11434/api/generate -M llama
 
 ## Data Storage
 
-SysGuard stores all data in the data directory (default: `/data/sysguard`):
+Auris stores all data in the data directory (default: `/data/auris`):
 
 ```
-/data/sysguard/
+/data/auris/
 ├── traces/      # Syscall traces (JSON)
 ├── profiles/    # Behavioral profiles (JSON)
 └── policies/    # Security policies (JSON)
@@ -142,7 +146,7 @@ SysGuard stores all data in the data directory (default: `/data/sysguard`):
 
 ## Security Considerations
 
-- SysGuard requires `CAP_SYS_PTRACE` capability to trace processes
+- Auris requires `CAP_SYS_PTRACE` capability to trace processes
 - In Docker, use `--cap-add=SYS_PTRACE --security-opt seccomp=unconfined`
 - Block mode enforcement can terminate processes - use with caution
 - Sensitive path detection includes common credential and key locations
@@ -174,7 +178,7 @@ SysGuard stores all data in the data directory (default: `/data/sysguard`):
 cd build && ctest --output-on-failure
 
 # Run specific test suite
-./tests/sysguard_tests
+./tests/auris_tests
 ```
 
 ## License

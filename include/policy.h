@@ -1,12 +1,12 @@
 /*
- * SysGuard - Security Policy Engine
+ * Auris - Security Policy Engine
  * Policy generation, storage, and enforcement
  */
 
-#ifndef SYSGUARD_POLICY_H
-#define SYSGUARD_POLICY_H
+#ifndef AURIS_POLICY_H
+#define AURIS_POLICY_H
 
-#include "sysguard.h"
+#include "auris.h"
 #include "profiler.h"
 
 /* Policy storage context */
@@ -206,4 +206,4 @@ typedef struct {
 sg_error_t sg_policy_check_sanity(const sg_policy_t *policy,
                                    sg_policy_check_result_t *result);
 
-#endif /* SYSGUARD_POLICY_H */
+#endif /* AURIS_POLICY_H */

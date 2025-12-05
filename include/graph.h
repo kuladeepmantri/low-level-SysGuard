@@ -1,12 +1,12 @@
 /*
- * SysGuard - Activity Graph
+ * Auris - Activity Graph
  * Graph-based representation of process, file, and network activity
  */
 
-#ifndef SYSGUARD_GRAPH_H
-#define SYSGUARD_GRAPH_H
+#ifndef AURIS_GRAPH_H
+#define AURIS_GRAPH_H
 
-#include "sysguard.h"
+#include "auris.h"
 
 /* Forward declaration */
 struct sg_trace;
@@ -195,4 +195,4 @@ sg_error_t sg_graph_save(const sg_graph_t *graph, const char *path);
  */
 sg_error_t sg_graph_load(const char *path, sg_graph_t **graph_out);
 
-#endif /* SYSGUARD_GRAPH_H */
+#endif /* AURIS_GRAPH_H */

@@ -1,12 +1,12 @@
 /*
- * SysGuard - JSON Utils Tests
+ * Auris - JSON Utils Tests
  */
 
 #include <check.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "trace_store.h"
 #include "profiler.h"
 #include "graph.h"

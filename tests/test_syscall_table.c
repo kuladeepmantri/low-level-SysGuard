@@ -1,12 +1,12 @@
 /*
- * SysGuard - Syscall Table Tests
+ * Auris - Syscall Table Tests
  */
 
 #include <check.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "syscall_table.h"
 
 static void setup(void)

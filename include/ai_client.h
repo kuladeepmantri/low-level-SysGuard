@@ -1,12 +1,12 @@
 /*
- * SysGuard - AI Analysis Client
+ * Auris - AI Analysis Client
  * Integration with local LLM service for security analysis
  */
 
-#ifndef SYSGUARD_AI_CLIENT_H
-#define SYSGUARD_AI_CLIENT_H
+#ifndef AURIS_AI_CLIENT_H
+#define AURIS_AI_CLIENT_H
 
-#include "sysguard.h"
+#include "auris.h"
 #include "profiler.h"
 #include "dataflow.h"
 #include "graph.h"
@@ -175,4 +175,4 @@ bool sg_ai_should_retry(sg_error_t err, int attempt);
  */
 int sg_ai_retry_delay(int attempt);
 
-#endif /* SYSGUARD_AI_CLIENT_H */
+#endif /* AURIS_AI_CLIENT_H */

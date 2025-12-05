@@ -1,12 +1,12 @@
 /*
- * SysGuard - Graph Tests
+ * Auris - Graph Tests
  */
 
 #include <check.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "graph.h"
 
 START_TEST(test_graph_alloc_free)

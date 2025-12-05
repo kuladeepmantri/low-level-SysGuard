@@ -1,5 +1,5 @@
 /*
- * SysGuard - Behavioral Profiler
+ * Auris - Behavioral Profiler
  * Build and compare behavioral profiles from syscall traces
  */
 
@@ -11,7 +11,7 @@
 #include <dirent.h>
 #include <json-c/json.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "profiler.h"
 #include "syscall_table.h"
 #include "dataflow.h"

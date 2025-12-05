@@ -1,5 +1,5 @@
 /*
- * SysGuard - JSON Utilities
+ * Auris - JSON Utilities
  * Serialization and deserialization helpers
  */
 
@@ -9,7 +9,7 @@
 #include <string.h>
 #include <json-c/json.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "trace_store.h"
 #include "profiler.h"
 #include "graph.h"
@@ -165,7 +165,7 @@ char *sg_trace_meta_to_json(const sg_trace_meta_t *meta)
     json_object_object_add(obj, "root_pid", json_object_new_int(meta->root_pid));
     json_object_object_add(obj, "exit_code", json_object_new_int(meta->exit_code));
     json_object_object_add(obj, "total_syscalls", json_object_new_int64((int64_t)meta->total_syscalls));
-    json_object_object_add(obj, "sysguard_version", json_object_new_string(meta->sysguard_version));
+    json_object_object_add(obj, "auris_version", json_object_new_string(meta->auris_version));
     json_object_object_add(obj, "start_time", timestamp_to_json(meta->start_time));
     json_object_object_add(obj, "end_time", timestamp_to_json(meta->end_time));
     
@@ -211,7 +211,7 @@ char *sg_trace_to_json(const sg_trace_t *trace)
     json_object_object_add(meta, "root_pid", json_object_new_int(trace->meta.root_pid));
     json_object_object_add(meta, "exit_code", json_object_new_int(trace->meta.exit_code));
     json_object_object_add(meta, "total_syscalls", json_object_new_int64((int64_t)trace->meta.total_syscalls));
-    json_object_object_add(meta, "sysguard_version", json_object_new_string(trace->meta.sysguard_version));
+    json_object_object_add(meta, "auris_version", json_object_new_string(trace->meta.auris_version));
     json_object_object_add(meta, "start_time", timestamp_to_json(trace->meta.start_time));
     json_object_object_add(meta, "end_time", timestamp_to_json(trace->meta.end_time));
     
@@ -361,9 +361,9 @@ sg_error_t sg_trace_from_json(const char *json, sg_trace_t **trace_out)
         if (json_object_object_get_ex(obj, "total_syscalls", &val)) {
             trace->meta.total_syscalls = json_object_get_int64(val);
         }
-        if (json_object_object_get_ex(obj, "sysguard_version", &val)) {
-            sg_safe_strncpy(trace->meta.sysguard_version, json_object_get_string(val),
-                            sizeof(trace->meta.sysguard_version));
+        if (json_object_object_get_ex(obj, "auris_version", &val)) {
+            sg_safe_strncpy(trace->meta.auris_version, json_object_get_string(val),
+                            sizeof(trace->meta.auris_version));
         }
         if (json_object_object_get_ex(obj, "start_time", &val)) {
             trace->meta.start_time = timestamp_from_json(val);

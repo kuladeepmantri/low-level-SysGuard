@@ -1,5 +1,5 @@
 /*
- * SysGuard - Activity Graph
+ * Auris - Activity Graph
  * Graph-based representation of process/file/network activity
  */
 
@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "graph.h"
 #include "trace_store.h"
 #include "syscall_table.h"
@@ -485,7 +485,7 @@ char *sg_graph_to_dot(const sg_graph_t *graph)
     }
     
     int pos = 0;
-    pos += snprintf(buf + pos, buf_size - pos, "digraph sysguard {\n");
+    pos += snprintf(buf + pos, buf_size - pos, "digraph auris {\n");
     pos += snprintf(buf + pos, buf_size - pos, "  rankdir=LR;\n");
     pos += snprintf(buf + pos, buf_size - pos, "  node [shape=box];\n\n");
     

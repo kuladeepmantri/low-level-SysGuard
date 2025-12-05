@@ -61,7 +61,7 @@ export default function Home() {
       }`}>
         <div className="px-5 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <span className="font-semibold text-[var(--text)]">SysGuard</span>
+            <span className="font-semibold text-[var(--text)]">Auris</span>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
@@ -103,7 +103,7 @@ export default function Home() {
             ))}
             <div className="border-t border-[var(--border)] mt-3 pt-3">
               <a 
-                href="https://github.com/kuladeepmantri/low-level-SysGuard"
+                href="https://github.com/kuladeepmantri/Auris"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-2.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text)] rounded-lg hover:bg-[var(--bg-tertiary)] transition-colors"
@@ -122,8 +122,8 @@ export default function Home() {
       <aside className="hidden lg:flex flex-col fixed left-0 top-0 w-56 h-screen border-r border-[var(--border)] bg-[var(--bg)] shadow-[var(--shadow)]">
         <div className="p-5 pb-4 border-b border-[var(--border)]">
           <div>
-            <h1 className="font-semibold text-[var(--text)] text-sm">SysGuard</h1>
-            <p className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">ARM64 Security</p>
+            <h1 className="font-semibold text-[var(--text)] text-sm">Auris</h1>
+            <p className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">Syscall Intelligence</p>
           </div>
         </div>
         
@@ -149,7 +149,7 @@ export default function Home() {
         <div className="p-4 border-t border-[var(--border)] bg-[var(--bg-secondary)]">
           <div className="flex items-center justify-between">
             <a 
-              href="https://github.com/kuladeepmantri/low-level-SysGuard"
+              href="https://github.com/kuladeepmantri/Auris"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[13px] text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors"
@@ -170,8 +170,8 @@ export default function Home() {
         {/* Overview */}
         <section id="overview" className="mb-16 scroll-mt-20">
           <div className="mb-6 flex flex-wrap items-center gap-3">
-            <a href="https://github.com/kuladeepmantri/low-level-SysGuard/actions" target="_blank" rel="noopener noreferrer" className="inline-block">
-              <img src="https://github.com/kuladeepmantri/low-level-SysGuard/actions/workflows/cmake-single-platform.yml/badge.svg" alt="Build Status" className="h-5 rounded" />
+            <a href="https://github.com/kuladeepmantri/Auris/actions" target="_blank" rel="noopener noreferrer" className="inline-block">
+              <img src="https://github.com/kuladeepmantri/Auris/actions/workflows/cmake-single-platform.yml/badge.svg" alt="Build Status" className="h-5 rounded" />
             </a>
             <span className="px-2.5 py-1 text-xs font-medium bg-[var(--bg-secondary)] text-[var(--text-secondary)] border border-[var(--border)] rounded-full">v1.0.0</span>
           </div>
@@ -179,14 +179,14 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-[var(--text)] mb-4">Overview</h2>
           
           <p className="text-[var(--text-secondary)] mb-4 leading-relaxed">
-            SysGuard is a security tool that monitors programs at the syscall level. It intercepts every 
-            system call a program makes, including file operations, network connections, and process creation. 
-            This data is used to build behavioral profiles, detect anomalies, and enforce security policies.
+            Auris is a research-grade security tool that listens to programs at the syscall level. It intercepts every 
+            system call a program makes — file operations, network connections, process creation — and uses this data 
+            to build behavioral profiles, detect anomalies, and enforce security policies.
           </p>
           
           <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
             Built for ARM64 Linux using the kernel&apos;s ptrace interface. Runs entirely in userspace 
-            with no kernel modules required. Optionally connects to LLMs for natural language security analysis.
+            with no kernel modules required. Connects to local or cloud LLMs for natural language analysis.
           </p>
 
           {/* Tech stack badges */}
@@ -210,8 +210,8 @@ export default function Home() {
           </p>
           
           <AnimatedTerminal
-            title="sysguard demo"
-            command="sysguard learn -- /bin/ls -la && sysguard profile -t trace-001"
+            title="auris demo"
+            command="auris learn -- /bin/ls -la && auris profile -t trace-001"
             output={`[ptrace] Attached to process 2847
 [trace] Intercepting syscalls...
   execve("/bin/ls", [...]) = 0
@@ -247,7 +247,7 @@ Profile ID: profile-001`}
 
           <AnimatedTerminal
             title="learn"
-            command="sysguard learn -- /usr/bin/curl https://example.com"
+            command="auris learn -- /usr/bin/curl https://example.com"
             output={`[ptrace] Attached to process 3201
 [ptrace] Options: TRACESYSGOOD | TRACEFORK | TRACECLONE
 
@@ -286,7 +286,7 @@ Trace ID: a8f3b2c1`}
 
           <AnimatedTerminal
             title="profile"
-            command="sysguard profile -t a8f3b2c1"
+            command="auris profile -t a8f3b2c1"
             output={`[profile] Loading trace a8f3b2c1...
 [profile] Computing syscall statistics...
 
@@ -328,7 +328,7 @@ Profile ID: c4d2e1f0`}
 
           <AnimatedTerminal
             title="compare"
-            command="sysguard compare -p c4d2e1f0 -- /usr/bin/curl https://evil.com"
+            command="auris compare -p c4d2e1f0 -- /usr/bin/curl https://evil.com"
             output={`[ptrace] Attached to process 3847
 [trace] Captured 412 syscalls in 923ms
 [compare] Loading baseline profile c4d2e1f0...
@@ -367,7 +367,7 @@ Anomalies found:
 
           <AnimatedTerminal
             title="policy"
-            command="sysguard policy -p c4d2e1f0"
+            command="auris policy -p c4d2e1f0"
             output={`[policy] Loading profile c4d2e1f0...
 [policy] Generating rules from baseline...
 
@@ -402,13 +402,13 @@ Policy ID: pol-7a3b`}
 
           <p className="text-[var(--text-secondary)] mb-6">
             Blocking works by overwriting the syscall number with -1 using <code>PTRACE_SETREGSET</code> 
-            before the kernel executes it. The kernel returns <code>-ENOSYS</code>. Then SysGuard 
+            before the kernel executes it. The kernel returns <code>-ENOSYS</code>. Then Auris 
             sends <code>SIGKILL</code> to terminate the process.
           </p>
 
           <AnimatedTerminal
             title="enforce"
-            command="sysguard enforce -P pol-7a3b -m block -- ./malware"
+            command="auris enforce -P pol-7a3b -m block -- ./malware"
             output={`[enforce] Loading policy pol-7a3b (24 rules)
 [enforce] Mode: BLOCK (terminate on violation)
 [ptrace] Attached to process 4102
@@ -435,19 +435,19 @@ Enforcement Summary:
           <h2 className="text-2xl font-semibold text-[var(--text)] mb-4">AI Integration</h2>
           
           <p className="text-[var(--text-secondary)] mb-4">
-            SysGuard includes an optional AI client that can send profiles and traces to a Local LLM 
-            (like Ollama) or an OpenAI-compatible API for natural language analysis.
+            Auris includes an optional AI client that can send profiles and traces to a local LLM 
+            (Ollama) or cloud APIs for natural language analysis.
           </p>
 
           <p className="text-[var(--text-secondary)] mb-6">
-            The AI analyzes the behavioral fingerprint to identify potential security risks, 
-            explain suspicious patterns, and recommend hardening steps. It&apos;s designed to be privacy-first: 
-            by default, it connects to <code>http://localhost:11434</code> (Ollama).
+            The AI analyzes behavioral fingerprints to identify potential security risks, 
+            explain suspicious patterns, and recommend hardening steps. Privacy-first by default: 
+            connects to <code>localhost:11434</code> (Ollama).
           </p>
 
           <AnimatedTerminal
             title="ai analysis"
-            command="sysguard analyze -p c4d2e1f0 -a http://localhost:11434/api/generate -M llama3"
+            command="auris analyze -p c4d2e1f0 --endpoint http://localhost:11434"
             output={`[ai] Connecting to http://localhost:11434...
 [ai] Model: llama3
 [ai] Sending profile c4d2e1f0 for analysis...
@@ -483,8 +483,8 @@ Recommendations:
           <h2 className="text-2xl font-semibold text-[var(--text)] mb-4">Internals</h2>
           
           <p className="text-[var(--text-secondary)] mb-4">
-            SysGuard uses <code>ptrace(PTRACE_SYSCALL)</code> to intercept syscalls. When a traced 
-            process makes a syscall, the kernel stops it and notifies SysGuard. The tracer then 
+            Auris uses <code>ptrace(PTRACE_SYSCALL)</code> to intercept syscalls. When a traced 
+            process makes a syscall, the kernel stops it and notifies Auris. The tracer then 
             reads the CPU registers to extract syscall information.
           </p>
 
@@ -525,7 +525,7 @@ where p(x) = count(syscall_x) / total_syscalls`}</pre>
           <h2 className="text-2xl font-semibold text-[var(--text)] mb-4">Sensitive File Detection</h2>
           
           <p className="text-[var(--text-secondary)] mb-6">
-            SysGuard monitors file access against 50+ patterns for sensitive paths. Access to these 
+            Auris monitors file access against 50+ patterns for sensitive paths. Access to these 
             files is flagged in profiles and can trigger alerts during enforcement.
           </p>
 
@@ -554,25 +554,25 @@ MEDIUM
           <h2 className="text-2xl font-semibold text-[var(--text)] mb-4">Setup</h2>
           
           <p className="text-[var(--text-secondary)] mb-4">
-            SysGuard requires <code>CAP_SYS_PTRACE</code> capability. Docker is the easiest way to run it:
+            Auris requires <code>CAP_SYS_PTRACE</code> capability. Docker is the easiest way to run it:
           </p>
 
           <AnimatedTerminal
             title="docker"
-            command="docker build --platform linux/arm64 -t sysguard ."
+            command="docker build --platform linux/arm64 -t auris ."
             output={`[+] Building 45.2s
  => [1/8] FROM debian:bookworm-slim
  => [2/8] RUN apt-get update && apt-get install -y ...
  => [3/8] COPY . /src
  => [4/8] RUN cmake -B build -DCMAKE_BUILD_TYPE=Release
  => [5/8] RUN cmake --build build
- => Successfully built sysguard
+ => Successfully built auris
 
 # Run with ptrace capability
 docker run --platform linux/arm64 \\
   --cap-add=SYS_PTRACE \\
   --security-opt seccomp=unconfined \\
-  -it sysguard`}
+  -it auris`}
           />
 
           <p className="text-[var(--text-secondary)] mt-8 mb-4">
@@ -590,7 +590,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 make -j$(nproc)
 
 # Run (needs CAP_SYS_PTRACE)
-sudo ./sysguard learn -- /bin/ls`}</pre>
+sudo ./auris learn -- /bin/ls`}</pre>
           </div>
         </section>
 
@@ -598,7 +598,7 @@ sudo ./sysguard learn -- /bin/ls`}</pre>
         <footer className="mt-16 pt-8 border-t border-[var(--border)]">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <span className="text-sm font-medium text-[var(--text)]">SysGuard</span>
+              <span className="text-sm font-medium text-[var(--text)]">Auris</span>
               <span className="text-sm text-[var(--text-muted)]"> · Built by </span>
               <a 
                 href="https://github.com/kuladeepmantri" 
@@ -613,7 +613,7 @@ sudo ./sysguard learn -- /bin/ls`}</pre>
               <span>MIT License</span>
               <span className="hidden sm:inline">·</span>
               <a 
-                href="https://github.com/kuladeepmantri/low-level-SysGuard" 
+                href="https://github.com/kuladeepmantri/Auris" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
@@ -623,7 +623,7 @@ sudo ./sysguard learn -- /bin/ls`}</pre>
             </div>
           </div>
           <p className="mt-4 text-xs text-[var(--text-muted)]">
-            ARM64 Linux syscall tracer and security analyzer.
+            ARM64 syscall tracer and behavioral security analyzer.
           </p>
         </footer>
       </main>

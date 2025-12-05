@@ -3,8 +3,8 @@
 
 set -e
 
-SYSGUARD="./sysguard"
-DATA_DIR="/tmp/sysguard_test_$$"
+AURIS="./auris"
+DATA_DIR="/tmp/auris_test_$$"
 
 cleanup() {
     rm -rf "$DATA_DIR"
@@ -17,7 +17,7 @@ mkdir -p "$DATA_DIR"
 echo "=== Test: Simple trace capture ==="
 
 # Trace /bin/true
-$SYSGUARD learn -d "$DATA_DIR" -t test-trace-1 -- /bin/true
+$AURIS learn -d "$DATA_DIR" -t test-trace-1 -- /bin/true
 
 # Verify trace was created
 if [ ! -f "$DATA_DIR/traces/test-trace-1.json" ]; then

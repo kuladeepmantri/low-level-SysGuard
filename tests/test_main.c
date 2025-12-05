@@ -1,5 +1,5 @@
 /*
- * SysGuard - Test Suite Main
+ * Auris - Test Suite Main
  * Unit test runner using Check framework
  */
 

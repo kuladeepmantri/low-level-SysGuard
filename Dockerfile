@@ -1,4 +1,4 @@
-# SysGuard - ARM Linux Syscall Tracer & Security Analyzer
+# Auris - ARM Linux Syscall Tracer & Security Analyzer
 # Multi-stage build for ARM64 Linux container
 
 ARG TARGETPLATFORM=linux/arm64
@@ -43,16 +43,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && mkdir -p /data /config
 
 # Copy the built binary
-COPY --from=builder /build/build/sysguard /usr/local/bin/sysguard
+COPY --from=builder /build/build/auris /usr/local/bin/auris
 
 # Set up non-root user for safer operation (can be overridden)
-RUN useradd -m -s /bin/bash sysguard
+RUN useradd -m -s /bin/bash auris
 
 # Default working directory for traces and profiles
 WORKDIR /data
 
 # Default entrypoint
-ENTRYPOINT ["/usr/local/bin/sysguard"]
+ENTRYPOINT ["/usr/local/bin/auris"]
 CMD ["--help"]
 
 # Development stage with all tools

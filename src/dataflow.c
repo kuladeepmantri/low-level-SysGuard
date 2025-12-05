@@ -1,5 +1,5 @@
 /*
- * SysGuard - Data Flow Analyzer
+ * Auris - Data Flow Analyzer
  * Track data flow and detect potential exfiltration
  */
 
@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "dataflow.h"
 #include "syscall_table.h"
 

@@ -1,5 +1,5 @@
 /*
- * SysGuard - ARM64 Linux Syscall Table
+ * Auris - ARM64 Linux Syscall Table
  * Complete syscall number to name mapping with argument types
  */
 
@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "syscall_table.h"
 #include "tracer.h"
 

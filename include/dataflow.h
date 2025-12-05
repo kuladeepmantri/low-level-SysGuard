@@ -1,12 +1,12 @@
 /*
- * SysGuard - Data Flow Analyzer
+ * Auris - Data Flow Analyzer
  * Track data flow through file descriptors and detect potential exfiltration
  */
 
-#ifndef SYSGUARD_DATAFLOW_H
-#define SYSGUARD_DATAFLOW_H
+#ifndef AURIS_DATAFLOW_H
+#define AURIS_DATAFLOW_H
 
-#include "sysguard.h"
+#include "auris.h"
 #include "trace_store.h"
 #include "graph.h"
 
@@ -154,4 +154,4 @@ sg_error_t sg_load_sensitive_patterns(const char *config_path);
  */
 void sg_sensitive_patterns_cleanup(void);
 
-#endif /* SYSGUARD_DATAFLOW_H */
+#endif /* AURIS_DATAFLOW_H */

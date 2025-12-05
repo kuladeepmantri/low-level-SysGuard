@@ -1,5 +1,5 @@
 /*
- * SysGuard - Policy Enforcer
+ * Auris - Policy Enforcer
  * Runtime enforcement of security policies via ptrace
  */
 
@@ -14,7 +14,7 @@
 #include <sys/uio.h>
 #include <linux/ptrace.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "enforcer.h"
 #include "syscall_table.h"
 

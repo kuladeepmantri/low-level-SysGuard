@@ -1,5 +1,5 @@
 /*
- * SysGuard - ARM Registers Tests
+ * Auris - ARM Registers Tests
  * Note: Most tests require running on ARM64 Linux with ptrace
  */
 
@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "tracer.h"
 
 /* These tests are mostly stubs since they require actual ptrace */

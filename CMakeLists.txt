@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(sysguard VERSION 1.0.0 LANGUAGES C)
+project(auris VERSION 1.0.0 LANGUAGES C)
 
 # Require C11 standard
 set(CMAKE_C_STANDARD 11)
@@ -44,7 +44,7 @@ include_directories(
 )
 
 # Source files
-set(SYSGUARD_SOURCES
+set(AURIS_SOURCES
     src/main.c
     src/tracer.c
     src/syscall_table.c
@@ -65,19 +65,19 @@ set(SYSGUARD_SOURCES
 )
 
 # Create the main executable
-add_executable(sysguard ${SYSGUARD_SOURCES})
+add_executable(auris ${AURIS_SOURCES})
 
 # Link libraries
 if(BUILD_STATIC)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
-    target_link_libraries(sysguard
+    target_link_libraries(auris
         ${CURL_STATIC_LIBRARIES}
         ${JSONC_STATIC_LIBRARIES}
         pthread
         dl
     )
 else()
-    target_link_libraries(sysguard
+    target_link_libraries(auris
         ${CURL_LIBRARIES}
         ${JSONC_LIBRARIES}
         OpenSSL::Crypto
@@ -86,20 +86,20 @@ else()
     )
 endif()
 
-target_link_directories(sysguard PRIVATE
+target_link_directories(auris PRIVATE
     ${CURL_LIBRARY_DIRS}
     ${JSONC_LIBRARY_DIRS}
 )
 
 # PIE for ASLR
-set_target_properties(sysguard PROPERTIES
+set_target_properties(auris PROPERTIES
     POSITION_INDEPENDENT_CODE ON
     LINK_FLAGS "-pie"
 )
 
 # Install target
-install(TARGETS sysguard DESTINATION bin)
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include/sysguard)
+install(TARGETS auris DESTINATION bin)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include/auris)
 
 # Testing
 if(BUILD_TESTS)
@@ -133,13 +133,13 @@ if(BUILD_TESTS)
         src/pattern_match.c
     )
     
-    add_executable(sysguard_tests ${TEST_SOURCES})
+    add_executable(auris_tests ${TEST_SOURCES})
     
-    target_include_directories(sysguard_tests PRIVATE
+    target_include_directories(auris_tests PRIVATE
         ${CHECK_INCLUDE_DIRS}
     )
     
-    target_link_libraries(sysguard_tests
+    target_link_libraries(auris_tests
         ${CHECK_LIBRARIES}
         ${JSONC_LIBRARIES}
         ${CURL_LIBRARIES}
@@ -147,13 +147,13 @@ if(BUILD_TESTS)
         m
     )
     
-    target_link_directories(sysguard_tests PRIVATE
+    target_link_directories(auris_tests PRIVATE
         ${CHECK_LIBRARY_DIRS}
         ${JSONC_LIBRARY_DIRS}
         ${CURL_LIBRARY_DIRS}
     )
     
-    add_test(NAME unit_tests COMMAND sysguard_tests)
+    add_test(NAME unit_tests COMMAND auris_tests)
     
     # Integration tests
     add_test(NAME integration_trace_simple
@@ -184,7 +184,7 @@ endif()
 
 # Print configuration summary
 message(STATUS "")
-message(STATUS "SysGuard Configuration Summary")
+message(STATUS "Auris Configuration Summary")
 message(STATUS "==============================")
 message(STATUS "Version:          ${PROJECT_VERSION}")
 message(STATUS "Build type:       ${CMAKE_BUILD_TYPE}")

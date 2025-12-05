@@ -1,12 +1,12 @@
 /*
- * SysGuard - Data Flow Tests
+ * Auris - Data Flow Tests
  */
 
 #include <check.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "dataflow.h"
 #include "syscall_table.h"
 

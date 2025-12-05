@@ -1,5 +1,5 @@
 /*
- * SysGuard - ARM Linux Syscall Tracer & Security Analyzer
+ * Auris - ARM Linux Syscall Tracer & Security Analyzer
  * Main entry point
  */
 
@@ -10,7 +10,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "cli.h"
 #include "syscall_table.h"
 #include "logging.h"
@@ -65,7 +65,7 @@ static sg_error_t init_subsystems(sg_log_level_t log_level)
         return err;
     }
     
-    sg_log(SG_LOG_DEBUG, "SysGuard %s initialized", SYSGUARD_VERSION_STRING);
+    sg_log(SG_LOG_DEBUG, "Auris %s initialized", AURIS_VERSION_STRING);
     
     return SG_OK;
 }

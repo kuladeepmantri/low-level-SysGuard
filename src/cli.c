@@ -1,5 +1,5 @@
 /*
- * SysGuard - Command Line Interface
+ * Auris - Command Line Interface
  * Argument parsing and command dispatch
  */
 
@@ -10,7 +10,7 @@
 #include <getopt.h>
 #include <stdarg.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "cli.h"
 #include "tracer.h"
 #include "trace_store.h"
@@ -22,7 +22,7 @@
 #include "graph.h"
 
 /* Default data directory */
-#define DEFAULT_DATA_DIR "/data/sysguard"
+#define DEFAULT_DATA_DIR "/data/auris"
 
 /* Command names (for debugging/logging) */
 __attribute__((unused))
@@ -74,8 +74,8 @@ void sg_cli_config_defaults(sg_config_t *config)
  */
 void sg_cli_usage(const char *program_name)
 {
-    printf("SysGuard %s - ARM Linux Syscall Tracer & Security Analyzer\n\n",
-           SYSGUARD_VERSION_STRING);
+    printf("Auris %s - ARM Linux Syscall Tracer & Security Analyzer\n\n",
+           AURIS_VERSION_STRING);
     
     printf("Usage: %s <command> [options] [-- program [args...]]\n\n", program_name);
     
@@ -119,7 +119,7 @@ void sg_cli_usage(const char *program_name)
  */
 void sg_cli_version(void)
 {
-    printf("SysGuard %s\n", SYSGUARD_VERSION_STRING);
+    printf("Auris %s\n", AURIS_VERSION_STRING);
     printf("ARM Linux Syscall Tracer & Security Analyzer\n");
     printf("Built for ARM64 Linux\n");
 }
@@ -132,7 +132,7 @@ void sg_cli_help(sg_command_t cmd)
     switch (cmd) {
         case CMD_LEARN:
             printf("learn - Trace a program and store the syscall trace\n\n");
-            printf("Usage: sysguard learn [options] -- program [args...]\n\n");
+            printf("Usage: auris learn [options] -- program [args...]\n\n");
             printf("Options:\n");
             printf("  -t, --trace-id ID   Custom trace ID (auto-generated if not specified)\n");
             printf("  -o, --output FILE   Also save trace to specified file\n");
@@ -140,7 +140,7 @@ void sg_cli_help(sg_command_t cmd)
             
         case CMD_PROFILE:
             printf("profile - Build or update a behavioral profile\n\n");
-            printf("Usage: sysguard profile [options]\n\n");
+            printf("Usage: auris profile [options]\n\n");
             printf("Options:\n");
             printf("  -t, --trace-id ID     Build profile from specific trace\n");
             printf("  -p, --profile-id ID   Update existing profile\n");
@@ -149,7 +149,7 @@ void sg_cli_help(sg_command_t cmd)
             
         case CMD_COMPARE:
             printf("compare - Compare a trace against baseline\n\n");
-            printf("Usage: sysguard compare [options] [-- program [args...]]\n\n");
+            printf("Usage: auris compare [options] [-- program [args...]]\n\n");
             printf("Options:\n");
             printf("  -p, --profile-id ID   Baseline profile to compare against\n");
             printf("  -t, --trace-id ID     Compare existing trace (or run new trace)\n");
@@ -157,7 +157,7 @@ void sg_cli_help(sg_command_t cmd)
             
         case CMD_POLICY:
             printf("policy - Generate or manage security policies\n\n");
-            printf("Usage: sysguard policy [options]\n\n");
+            printf("Usage: auris policy [options]\n\n");
             printf("Options:\n");
             printf("  -p, --profile-id ID   Generate policy from profile\n");
             printf("  -P, --policy-id ID    View or update existing policy\n");
@@ -166,7 +166,7 @@ void sg_cli_help(sg_command_t cmd)
             
         case CMD_ENFORCE:
             printf("enforce - Run program under policy enforcement\n\n");
-            printf("Usage: sysguard enforce [options] -- program [args...]\n\n");
+            printf("Usage: auris enforce [options] -- program [args...]\n\n");
             printf("Options:\n");
             printf("  -P, --policy-id ID    Policy to enforce\n");
             printf("  -m, --mode MODE       alert (log only) or block (prevent)\n");
@@ -174,7 +174,7 @@ void sg_cli_help(sg_command_t cmd)
             
         case CMD_ANALYZE:
             printf("analyze - Request AI analysis\n\n");
-            printf("Usage: sysguard analyze [options]\n\n");
+            printf("Usage: auris analyze [options]\n\n");
             printf("Options:\n");
             printf("  -p, --profile-id ID   Analyze profile\n");
             printf("  -t, --trace-id ID     Analyze trace\n");
@@ -183,7 +183,7 @@ void sg_cli_help(sg_command_t cmd)
             break;
             
         default:
-            sg_cli_usage("sysguard");
+            sg_cli_usage("auris");
             break;
     }
 }
@@ -580,13 +580,13 @@ sg_error_t sg_cli_execute(const sg_cli_opts_t *opts)
         case CMD_ANALYZE:
             return sg_cmd_analyze(opts);
         case CMD_HELP:
-            sg_cli_usage("sysguard");
+            sg_cli_usage("auris");
             return SG_OK;
         case CMD_VERSION:
             sg_cli_version();
             return SG_OK;
         default:
-            sg_cli_usage("sysguard");
+            sg_cli_usage("auris");
             return SG_ERR_INVALID_ARG;
     }
 }
@@ -597,7 +597,7 @@ sg_error_t sg_cli_execute(const sg_cli_opts_t *opts)
 sg_error_t sg_cmd_learn(const sg_cli_opts_t *opts)
 {
     if (opts->binary_path[0] == '\0') {
-        sg_cli_error("No program specified. Use: sysguard learn -- program [args...]");
+        sg_cli_error("No program specified. Use: auris learn -- program [args...]");
         return SG_ERR_INVALID_ARG;
     }
     
@@ -979,8 +979,8 @@ sg_error_t sg_cmd_analyze(const sg_cli_opts_t *opts)
     /* Check if AI is configured */
     if (!opts->config.ai.enabled || opts->config.ai.endpoint[0] == '\0') {
         printf("AI Analysis requires an AI endpoint.\n");
-        printf("Usage: sysguard analyze -p <profile-id> --ai-endpoint <URL> --ai-model <model>\n");
-        printf("Example: sysguard analyze -p <profile-id> --ai-endpoint http://localhost:11434/api/generate --ai-model llama2\n");
+        printf("Usage: auris analyze -p <profile-id> --ai-endpoint <URL> --ai-model <model>\n");
+        printf("Example: auris analyze -p <profile-id> --ai-endpoint http://localhost:11434/api/generate --ai-model llama2\n");
         return SG_ERR_CONFIG;
     }
     

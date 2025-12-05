@@ -1,5 +1,5 @@
 /*
- * SysGuard - Utility Functions
+ * Auris - Utility Functions
  * Common helper functions used throughout the codebase
  */
 
@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include <openssl/evp.h>
 
-#include "sysguard.h"
+#include "auris.h"
 
 /*
  * Get current timestamp with nanosecond precision

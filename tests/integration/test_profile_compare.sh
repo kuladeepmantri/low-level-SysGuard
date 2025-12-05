@@ -3,8 +3,8 @@
 
 set -e
 
-SYSGUARD="./sysguard"
-DATA_DIR="/tmp/sysguard_test_$$"
+AURIS="./auris"
+DATA_DIR="/tmp/auris_test_$$"
 
 cleanup() {
     rm -rf "$DATA_DIR"
@@ -16,10 +16,10 @@ mkdir -p "$DATA_DIR"
 echo "=== Test: Profile comparison ==="
 
 # Learn baseline behavior
-$SYSGUARD learn -d "$DATA_DIR" -t baseline-trace -- /bin/true
+$AURIS learn -d "$DATA_DIR" -t baseline-trace -- /bin/true
 
 # Build profile
-$SYSGUARD profile -d "$DATA_DIR" -t baseline-trace
+$AURIS profile -d "$DATA_DIR" -t baseline-trace
 
 # Get profile ID
 PROFILE_ID=$(ls "$DATA_DIR/profiles/" | head -1 | sed 's/.json$//')
@@ -30,7 +30,7 @@ if [ -z "$PROFILE_ID" ]; then
 fi
 
 # Compare same program (should have low deviation)
-OUTPUT=$($SYSGUARD compare -d "$DATA_DIR" -p "$PROFILE_ID" -j -- /bin/true)
+OUTPUT=$($AURIS compare -d "$DATA_DIR" -p "$PROFILE_ID" -j -- /bin/true)
 
 if ! echo "$OUTPUT" | grep -q '"is_anomalous"'; then
     echo "FAIL: Comparison output missing is_anomalous field"

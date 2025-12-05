@@ -1,12 +1,12 @@
 /*
- * SysGuard - ARM64 Linux Syscall Table
+ * Auris - ARM64 Linux Syscall Table
  * Syscall number to name mapping and argument type information
  */
 
-#ifndef SYSGUARD_SYSCALL_TABLE_H
-#define SYSGUARD_SYSCALL_TABLE_H
+#ifndef AURIS_SYSCALL_TABLE_H
+#define AURIS_SYSCALL_TABLE_H
 
-#include "sysguard.h"
+#include "auris.h"
 
 /* Maximum syscall number we handle (ARM64 Linux) */
 #define MAX_SYSCALL_NR 512
@@ -433,4 +433,4 @@ int sg_syscall_format_args(const sg_syscall_event_t *event,
 #define SYS_futex_waitv         449
 #define SYS_set_mempolicy_home_node 450
 
-#endif /* SYSGUARD_SYSCALL_TABLE_H */
+#endif /* AURIS_SYSCALL_TABLE_H */

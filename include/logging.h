@@ -1,12 +1,12 @@
 /*
- * SysGuard - Logging Header
+ * Auris - Logging Header
  * Thread-safe logging with levels and optional file output
  */
 
-#ifndef SYSGUARD_LOGGING_H
-#define SYSGUARD_LOGGING_H
+#ifndef AURIS_LOGGING_H
+#define AURIS_LOGGING_H
 
-#include "sysguard.h"
+#include "auris.h"
 
 /*
  * Initialize logging subsystem
@@ -38,4 +38,4 @@ const char *sg_strerror(sg_error_t err);
  */
 void sg_perror(const char *prefix, sg_error_t err);
 
-#endif /* SYSGUARD_LOGGING_H */
+#endif /* AURIS_LOGGING_H */

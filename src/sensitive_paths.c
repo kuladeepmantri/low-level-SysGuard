@@ -1,5 +1,5 @@
 /*
- * SysGuard - Sensitive Path Detection
+ * Auris - Sensitive Path Detection
  * Identify sensitive files and directories
  */
 
@@ -9,7 +9,7 @@
 #include <string.h>
 #include <fnmatch.h>
 
-#include "sysguard.h"
+#include "auris.h"
 #include "dataflow.h"
 
 /* Sensitive path pattern */

@@ -1,5 +1,5 @@
 /*
- * SysGuard - Logging System
+ * Auris - Logging System
  * Thread-safe logging with multiple output targets
  */
 
@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "sysguard.h"
+#include "auris.h"
 
 /* Logging state */
 static struct {

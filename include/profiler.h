@@ -1,12 +1,12 @@
 /*
- * SysGuard - Behavioral Profiler
+ * Auris - Behavioral Profiler
  * Build and compare behavioral profiles from syscall traces
  */
 
-#ifndef SYSGUARD_PROFILER_H
-#define SYSGUARD_PROFILER_H
+#ifndef AURIS_PROFILER_H
+#define AURIS_PROFILER_H
 
-#include "sysguard.h"
+#include "auris.h"
 #include "trace_store.h"
 
 /* Profile storage context */
@@ -176,4 +176,4 @@ double sg_compare_distributions(const sg_syscall_stats_t *baseline,
                                  const sg_syscall_stats_t *observed,
                                  size_t observed_count);
 
-#endif /* SYSGUARD_PROFILER_H */
+#endif /* AURIS_PROFILER_H */
