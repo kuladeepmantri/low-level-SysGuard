@@ -1,6 +1,10 @@
 # SysGuard
+[![CMake Build](https://github.com/kuladeepmantri/low-level-SysGuard/actions/workflows/cmake-single-platform.yml/badge.svg)](https://github.com/kuladeepmantri/low-level-SysGuard/actions/workflows/cmake-single-platform.yml)
+[![Website](https://img.shields.io/badge/Website-Live_Demo-blue?style=flat&logo=next.js)](https://kuladeepmantri.github.io/low-level-SysGuard/)
 
 **ARM Linux Syscall Tracer & Security Analyzer**
+
+[**View Live Website & Demo**](https://kuladeepmantri.github.io/low-level-SysGuard/)
 
 SysGuard is a production-quality command-line security application for ARM64 Linux containers. It provides syscall tracing, behavioral profiling, adaptive policy enforcement, and AI-assisted security analysis.
 
