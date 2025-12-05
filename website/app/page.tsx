@@ -10,7 +10,7 @@ export default function Home() {
       {/* Solid fixed header */}
       <header className="fixed top-0 w-full z-50 bg-[var(--bg)] border-b border-[var(--border)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <a href="#" className="font-medium text-[var(--text)]">Auris</a>
+          <a href="http://kuladeepmantri.com/" className="font-medium text-[var(--text)]">kuladeepmantri</a>
           <div className="flex items-center gap-4">
             <a 
               href="https://github.com/kuladeepmantri/Auris" 
