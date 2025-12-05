@@ -15,6 +15,7 @@
 #include "syscall_table.h"
 #include "logging.h"
 #include "dataflow.h"
+#include "inject.h"
 
 /* Global for signal handling */
 static volatile sig_atomic_t g_interrupted = 0;
@@ -121,6 +122,13 @@ int main(int argc, char *argv[])
     if (opts.command == CMD_NONE) {
         sg_cli_usage(argv[0]);
         exit_code = EXIT_FAILURE;
+        goto cleanup_opts;
+    }
+    
+    /* Handle inject command specially - it has its own CLI parser */
+    if (opts.command == CMD_INJECT) {
+        /* Pass remaining args to inject subsystem */
+        exit_code = sg_inject_main(argc - 1, argv + 1);
         goto cleanup_opts;
     }
     

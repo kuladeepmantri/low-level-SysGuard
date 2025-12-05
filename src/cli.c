@@ -27,7 +27,7 @@
 /* Command names (for debugging/logging) */
 __attribute__((unused))
 static const char *command_names[] = {
-    "none", "learn", "profile", "compare", "policy", "enforce", "analyze", "help", "version"
+    "none", "learn", "profile", "compare", "policy", "enforce", "analyze", "inject", "help", "version"
 };
 
 /* Long options */
@@ -86,6 +86,7 @@ void sg_cli_usage(const char *program_name)
     printf("  policy    Generate or manage security policies\n");
     printf("  enforce   Run a program under policy enforcement\n");
     printf("  analyze   Request AI analysis of traces or profiles\n");
+    printf("  inject    Process injection framework (offensive security)\n");
     printf("  help      Show this help message\n");
     printf("  version   Show version information\n\n");
     
@@ -203,6 +204,7 @@ static sg_command_t parse_command(const char *cmd)
     if (strcmp(cmd, "policy") == 0) return CMD_POLICY;
     if (strcmp(cmd, "enforce") == 0) return CMD_ENFORCE;
     if (strcmp(cmd, "analyze") == 0) return CMD_ANALYZE;
+    if (strcmp(cmd, "inject") == 0) return CMD_INJECT;
     if (strcmp(cmd, "help") == 0) return CMD_HELP;
     if (strcmp(cmd, "version") == 0) return CMD_VERSION;
     
@@ -579,6 +581,9 @@ sg_error_t sg_cli_execute(const sg_cli_opts_t *opts)
             return sg_cmd_enforce(opts);
         case CMD_ANALYZE:
             return sg_cmd_analyze(opts);
+        case CMD_INJECT:
+            /* Inject has its own argument parsing, handled in main.c */
+            return SG_OK;
         case CMD_HELP:
             sg_cli_usage("auris");
             return SG_OK;

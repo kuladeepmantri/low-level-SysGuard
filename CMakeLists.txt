@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(auris VERSION 1.0.0 LANGUAGES C)
+project(auris VERSION 2.0.0 LANGUAGES C)
 
 # Require C11 standard
 set(CMAKE_C_STANDARD 11)
@@ -62,6 +62,11 @@ set(AURIS_SOURCES
     src/arm_regs.c
     src/sensitive_paths.c
     src/pattern_match.c
+    # Injection framework (v2 - offensive security)
+    src/inject.c
+    src/shellcode.c
+    src/rop.c
+    src/inject_cli.c
 )
 
 # Create the main executable

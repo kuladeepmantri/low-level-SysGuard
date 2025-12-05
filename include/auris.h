@@ -16,10 +16,10 @@
 #include <sys/types.h>
 
 /* Version information */
-#define AURIS_VERSION_MAJOR 1
+#define AURIS_VERSION_MAJOR 2
 #define AURIS_VERSION_MINOR 0
 #define AURIS_VERSION_PATCH 0
-#define AURIS_VERSION_STRING "1.0.0"
+#define AURIS_VERSION_STRING "2.0.0"
 
 /* Limits and constants */
 #define MAX_PATH_LEN 4096
@@ -481,6 +481,7 @@ typedef enum {
     CMD_POLICY,
     CMD_ENFORCE,
     CMD_ANALYZE,
+    CMD_INJECT,      /* v2: Process injection framework */
     CMD_HELP,
     CMD_VERSION,
 } sg_command_t;

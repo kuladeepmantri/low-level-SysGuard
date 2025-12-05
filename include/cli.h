@@ -71,6 +71,12 @@ sg_error_t sg_cmd_enforce(const sg_cli_opts_t *opts);
  */
 sg_error_t sg_cmd_analyze(const sg_cli_opts_t *opts);
 
+/*
+ * Inject mode: process injection framework (v2)
+ * Defined in inject_cli.c
+ */
+int sg_inject_main(int argc, char *argv[]);
+
 /* Output formatting */
 
 /*
