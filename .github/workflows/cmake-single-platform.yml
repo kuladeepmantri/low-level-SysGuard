@@ -1,6 +1,7 @@
-# This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
-# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
-name: CMake on a single platform
+# Auris v2.0 - ARM64 Syscall Tracer & Security Toolkit
+# This workflow builds Auris on ARM64 using QEMU emulation
+# Note: Auris is designed for ARM64 Linux and uses ARM64-specific ptrace features
+name: Build Auris
 
 on:
   push:
@@ -9,16 +10,45 @@ on:
     branches: [ "main" ]
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
 jobs:
-  build:
-    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
-    # You can convert this to a matrix build if you need cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  build-arm64:
+    name: Build (ARM64)
     runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
 
+    - name: Set up QEMU for ARM64
+      uses: docker/setup-qemu-action@v3
+      with:
+        platforms: arm64
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build in ARM64 container
+      run: |
+        docker run --rm --platform linux/arm64 \
+          -v ${{ github.workspace }}:/src \
+          -w /src \
+          arm64v8/debian:bookworm-slim \
+          bash -c "
+            apt-get update && \
+            apt-get install -y build-essential cmake pkg-config \
+              libcurl4-openssl-dev libssl-dev libjson-c-dev && \
+            cmake -B build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DBUILD_TESTS=OFF && \
+            cmake --build build --config ${{ env.BUILD_TYPE }} && \
+            echo 'Build successful!' && \
+            file build/auris
+          "
+
+  # Also verify the code compiles on x86_64 (syntax check only - won't run)
+  build-x86:
+    name: Syntax Check (x86_64)
+    runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v4
 
@@ -38,9 +68,10 @@ jobs:
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
-    - name: Verify binary
+      
+    - name: Note
       run: |
-        ${{github.workspace}}/build/auris version
-        echo "Build successful!"
+        echo "Note: This x86_64 build is for syntax verification only."
+        echo "Auris is designed for ARM64 Linux and uses ARM64-specific features."
+        echo "The ARM64 build above is the primary build target."
 

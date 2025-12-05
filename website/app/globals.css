@@ -13,8 +13,9 @@
   --text-muted: #94a3b8;
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
+  /* Changed from blue to emerald/teal for a more mature, security-focused look */
+  --accent: #10b981;
+  --accent-hover: #059669;
   --terminal-bg: #0f172a;
   --terminal-text: #e2e8f0;
   --terminal-dim: #64748b;
@@ -37,8 +38,9 @@
   --text-muted: #475569;
   --border: #1e293b;
   --border-strong: #334155;
-  --accent: #60a5fa;
-  --accent-hover: #3b82f6;
+  /* Emerald accent for dark mode - more professional security tool aesthetic */
+  --accent: #34d399;
+  --accent-hover: #10b981;
   --terminal-bg: #0f172a;
   --terminal-border: #1e293b;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
