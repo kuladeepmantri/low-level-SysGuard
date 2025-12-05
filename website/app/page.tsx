@@ -84,7 +84,7 @@ export default function Home() {
             ))}
             <div className="border-t border-[var(--border)] mt-2 pt-2">
               <a 
-                href="https://github.com/kuladeepmantri/low-level-km"
+                href="https://github.com/kuladeepmantri/low-level-SysGuard"
                 className="block py-2 text-sm text-[var(--text-secondary)]"
               >
                 GitHub ↗
@@ -120,7 +120,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[var(--border)] bg-[var(--bg)]">
           <div className="flex items-center justify-between px-2">
             <a 
-              href="https://github.com/kuladeepmantri/low-level-km"
+              href="https://github.com/kuladeepmantri/low-level-SysGuard"
               className="text-sm text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors"
             >
               GitHub ↗
@@ -136,8 +136,8 @@ export default function Home() {
         {/* Overview */}
         <section id="overview" className="mb-20 scroll-mt-20">
           <div className="mb-5">
-            <a href="https://github.com/kuladeepmantri/low-level-km/actions" target="_blank" rel="noopener noreferrer">
-              <img src="https://github.com/kuladeepmantri/low-level-km/actions/workflows/cmake-single-platform.yml/badge.svg" alt="Build" className="h-5" />
+            <a href="https://github.com/kuladeepmantri/low-level-SysGuard/actions" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/kuladeepmantri/low-level-SysGuard/actions/workflows/cmake-single-platform.yml/badge.svg" alt="Build" className="h-5" />
             </a>
           </div>
           
@@ -559,8 +559,8 @@ sudo ./sysguard learn -- /bin/ls`}</pre>
         <footer className="pt-8 border-t border-[var(--border)] text-sm text-[var(--text-muted)]">
           MIT License
           <span className="mx-2">·</span>
-          <a href="https://github.com/kuladeepmantri/low-level-km" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">
-            github.com/kuladeepmantri/low-level-km
+          <a href="https://github.com/kuladeepmantri/low-level-SysGuard" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">
+            github.com/kuladeepmantri/low-level-SysGuard
           </a>
         </footer>
       </main>

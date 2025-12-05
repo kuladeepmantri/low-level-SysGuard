@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/low-level-km' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/low-level-km/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/low-level-SysGuard' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/low-level-SysGuard/' : '',
 }
 
 module.exports = nextConfig
